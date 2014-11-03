@@ -562,18 +562,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(void)setDataDetectorTypes:(UIDataDetectorTypes)datadetector
-{
-	internalTextView.dataDetectorTypes = datadetector;
-}
-
--(UIDataDetectorTypes)dataDetectorTypes
-{
-	return internalTextView.dataDetectorTypes;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 -(void)setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType
 {
   internalTextView.autocorrectionType = autocorrectionType;
