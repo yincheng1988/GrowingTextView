@@ -574,6 +574,43 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+-(void)setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType
+{
+  internalTextView.autocorrectionType = autocorrectionType;
+}
+
+-(UITextAutocorrectionType)autocorrectionType
+{
+  return internalTextView.autocorrectionType;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+-(void)setSpellCheckingType:(UITextSpellCheckingType)spellCheckingType
+{
+  internalTextView.spellCheckingType = spellCheckingType;
+}
+
+-(UITextSpellCheckingType)spellCheckingType
+{
+  return internalTextView.spellCheckingType;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+-(void)setDataDetectorTypes:(UIDataDetectorTypes)datadetector
+{
+  internalTextView.dataDetectorTypes = datadetector;
+}
+
+-(UIDataDetectorTypes)dataDetectorTypes
+{
+  return internalTextView.dataDetectorTypes;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 - (BOOL)hasText{
 	return [internalTextView hasText];
 }
@@ -639,14 +676,13 @@
         	return [delegate growingTextView:self shouldChangeTextInRange:range replacementText:atext];
 	
 	if ([atext isEqualToString:@"\n"]) {
-		if ([delegate respondsToSelector:@selector(growingTextViewShouldReturn:)]) {
-			if (![delegate performSelector:@selector(growingTextViewShouldReturn:) withObject:self]) {
-				return YES;
-			} else {
-				[textView resignFirstResponder];
-				return NO;
-			}
-		}
+    if ([delegate respondsToSelector:@selector(growingTextViewShouldReturn:)]) {
+      [delegate performSelector:@selector(growingTextViewShouldReturn:) withObject:self];
+      return NO;
+    } else {
+      [textView resignFirstResponder];
+      return YES;
+    }
 	}
 	
 	return YES;
